@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>台北市政見對照</title>
+<meta name="description" content="兩份台北市長選舉政見文宣合併成一張表：依類別對照，並標出每條政見屬於態度、施政方向或具體目標，以及事後評估有沒有做到的難度。">
+<style>
+:root{
+  --bg:#ffffff; --fg:#111719; --muted:#4a5559; --line:#d9dfe1; --soft:#f3f6f6;
+  --accent:#2A6369;
+  --blue:#1f4e9c; --blue-bg:#eaf0fa; --blue-line:#b9cbea;
+  --green:#17703f; --green-bg:#e8f4ec; --green-line:#b4dcc1;
+  --f-sans:"Segoe UI","Helvetica Neue",Arial,"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121718; --fg:#e8eeef; --muted:#a9b6b9; --line:#2f3a3c; --soft:#1b2224;
+    --accent:#669096;
+    --blue:#8fb1ee; --blue-bg:#17233a; --blue-line:#2c4470;
+    --green:#7fd0a0; --green-bg:#142a1d; --green-line:#285a3b;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121718; --fg:#e8eeef; --muted:#a9b6b9; --line:#2f3a3c; --soft:#1b2224;
+  --accent:#669096;
+  --blue:#8fb1ee; --blue-bg:#17233a; --blue-line:#2c4470;
+  --green:#7fd0a0; --green-bg:#142a1d; --green-line:#285a3b;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-sans);font-size:15px;line-height:1.5}
+a{color:var(--accent)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1440px;margin:0 auto;padding:12px 16px 40px}
+header.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;border-bottom:2px solid var(--fg);padding-bottom:8px}
+header.top h1{font-size:22px;margin:0;letter-spacing:.5px}
+header.top .sub{color:var(--muted);font-size:13.5px;flex:1 1 420px}
+header.top .src{font-size:13px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:300px 1fr;gap:16px;margin-top:12px;align-items:start}
+aside{position:sticky;top:8px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 16px);overflow:auto;padding-right:4px}
+.panel{border:1px solid var(--line);border-radius:8px;padding:10px}
+.panel h2{font-size:13px;margin:0 0 6px;color:var(--muted);font-weight:600;letter-spacing:.5px}
+/* matrix */
+.mx{border-collapse:collapse;width:100%;font-size:13px;margin-bottom:8px}
+.mx caption{text-align:left;font-weight:700;padding:2px 0 4px;font-size:14px}
+.mx caption .n{font-weight:400;color:var(--muted);font-size:12.5px}
+.mx th{font-weight:500;color:var(--muted);padding:2px 4px;text-align:center;font-size:12.5px}
+.mx th.r{text-align:left}
+.mx td{padding:2px}
+.mx td button{width:100%;min-height:30px;border:1px solid var(--line);border-radius:4px;background:var(--bg);cursor:pointer;font-variant-numeric:tabular-nums;font-weight:600}
+.mx.blue td button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.mx.green td button.on{background:var(--green);color:#fff;border-color:var(--green)}
+:root[data-theme="dark"] .mx td button.on{color:#111}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .mx td button.on{color:#111}}
+.mx td button:disabled{opacity:.35;cursor:default}
+.mx.blue caption{color:var(--blue)} .mx.green caption{color:var(--green)}
+.mx .tot{color:var(--muted);font-weight:400;text-align:center;font-size:12.5px}
+/* filters */
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:3px 10px;min-height:32px;cursor:pointer;font-size:13.5px}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.seg button.b[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.seg button.g[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.seg button .c{opacity:.7;font-size:12px;margin-left:3px}
+.seg button:disabled{opacity:.4;cursor:default}
+.frow{display:grid;grid-template-columns:44px 1fr;gap:6px;align-items:center;margin-top:6px}
+.frow > span{font-size:12.5px;color:var(--muted)}
+input[type=search]{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;min-height:34px}
+.status{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-bottom:8px}
+.status b{color:var(--fg)}
+.status button{border:1px solid var(--line);background:var(--soft);border-radius:6px;padding:2px 10px;min-height:30px;cursor:pointer}
+details.rub summary{cursor:pointer;font-size:13px;font-weight:600}
+details.rub dl{margin:6px 0 0;font-size:13px}
+details.rub dt{font-weight:700;margin-top:6px}
+details.rub dd{margin:0 0 0 0;color:var(--muted)}
+/* main grid */
+.cols-head{display:grid;grid-template-columns:150px 1fr 1fr;gap:10px;position:sticky;top:0;background:var(--bg);z-index:2;padding:4px 0;border-bottom:1px solid var(--line)}
+.cols-head div{font-weight:700;font-size:14px}
+.cols-head .hb{color:var(--blue)} .cols-head .hg{color:var(--green)}
+.cat{display:grid;grid-template-columns:150px 1fr 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.cat h3{margin:0;font-size:15px;line-height:1.35}
+.cat h3 .cn{display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:2px}
+.side{display:flex;flex-direction:column;gap:6px;min-width:0}
+.empty{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:6px 8px}
+.card{border:1px solid var(--line);border-left:5px solid;border-radius:6px;padding:6px 9px 7px;background:var(--bg)}
+.card.blue{border-left-color:var(--blue);background:var(--blue-bg)}
+.card.green{border-left-color:var(--green);background:var(--green-bg)}
+.card .t{font-size:14.5px;font-weight:500}
+.card .meta{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:4px;align-items:center}
+.chip{font-size:12px;border-radius:4px;padding:0 6px;line-height:20px;border:1px solid currentColor;white-space:nowrap}
+.chip.k-goal{border-style:solid}
+.chip.k-dir{border-style:dotted}
+.chip.k-att{border-style:dashed}
+.mx .sh{font-weight:700;font-size:13px;text-align:center;padding-bottom:0}
+.mx .sh.b{color:var(--blue)} .mx .sh.g{color:var(--green)}
+.mx td.gap{width:6px;padding:0}
+.mx td button.ob{background:var(--blue);color:#fff;border-color:var(--blue)}
+.mx td button.og{background:var(--green);color:#fff;border-color:var(--green)}
+.mxpct{font-size:12.5px;color:var(--muted);line-height:1.6}
+.mxpct b.b{color:var(--blue)} .mxpct b.g{color:var(--green)}
+.limlist{margin:6px 0 4px;padding-left:18px;font-size:13px}
+.limlist li{margin:2px 0}
+.status button:disabled{opacity:.45;cursor:default}
+.fab{display:none}
+.cat.one,.cols-head.one{grid-template-columns:150px 1fr}
+.chip.grp{border:none;color:var(--muted);padding:0}
+.dots{font-size:12px;white-space:nowrap;color:var(--fg)}
+.dots i{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--fg);margin-right:2px;vertical-align:-1px}
+.dots i.f{background:var(--fg)}
+.card .why{font-size:12.5px;color:var(--muted);margin-top:3px}
+mark{background:#ffe48a;color:#111;padding:0}
+/* original-group mode */
+.orig{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.orig .gh{font-weight:700;font-size:14px;margin:10px 0 4px;padding-bottom:2px;border-bottom:2px solid}
+.orig .blue .gh{color:var(--blue);border-color:var(--blue-line)}
+.orig .green .gh{color:var(--green);border-color:var(--green-line)}
+.orig .gh small{font-weight:400;color:var(--muted);margin-left:6px}
+.orig .side{gap:6px}
+.colt{font-weight:700;font-size:16px;padding:4px 0}
+.colt.b{color:var(--blue)} .colt.g{color:var(--green)}
+section.notes{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+section.notes h2{font-size:16px;margin:0 0 6px}
+section.notes ul{margin:0;padding-left:20px;font-size:14px}
+section.notes li{margin:3px 0}
+section.notes .imgs{display:flex;gap:8px;flex-wrap:wrap}
+section.notes .imgs a{display:block;width:calc(50% - 4px)}
+section.notes .imgs img{width:100%;border:1px solid var(--line);border-radius:4px}
+.theme{border:1px solid var(--line);background:var(--bg);border-radius:6px;min-height:30px;padding:2px 8px;cursor:pointer;font-size:13px}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static;max-height:none;overflow:visible}
+  .cols-head{display:none}
+  .cat{grid-template-columns:1fr;gap:6px}
+  .cat .side::before{content:attr(data-label);font-size:12.5px;font-weight:700}
+  .cat .side.blue::before{color:var(--blue)} .cat .side.green::before{color:var(--green)}
+  .orig{grid-template-columns:1fr}
+  section.notes{grid-template-columns:1fr}
+  .cat.one{grid-template-columns:1fr}
+  .seg button,.status button,.theme{min-height:40px}
+  .mx td button{min-height:38px}
+  .fab{display:block;position:fixed;right:16px;bottom:16px;z-index:5;border:none;border-radius:999px;padding:10px 18px;min-height:44px;background:var(--accent);color:#fff;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
+}
+@media (min-width:901px) and (max-width:1180px){
+  .layout{grid-template-columns:260px 1fr}
+  .cols-head,.cat{grid-template-columns:110px 1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1>台北市政見對照</h1>
+  <span class="sub">2026 台北市長選舉，兩份文宣 72 條政見合併成一張表。每條標出寫法屬於<b>態度</b>、<b>施政方向</b>或<b>具體目標</b>，以及任期結束後要判斷「有沒有做到」的難度。</span>
+  <span class="src"><a href="#notes">分類判準與限制</a> · <button class="theme" id="themeBtn" type="button">深色／淺色</button></span>
+</header>
+
+<div class="layout">
+<aside aria-label="篩選">
+  <div class="panel">
+    <h2>類型 × 評估難度（點格子篩選）</h2>
+    <div id="matrices"></div>
+    <div id="mxpct" class="mxpct"></div>
+  </div>
+  <div class="panel">
+    <h2>篩選</h2>
+    <div class="frow"><span>來源</span><div class="seg" id="fSide"></div></div>
+    <div class="frow"><span>類型</span><div class="seg" id="fType"></div></div>
+    <div class="frow"><span>難度</span><div class="seg" id="fDiff"></div></div>
+    <div class="frow"><span>搜尋</span><input type="search" id="q" placeholder="例：青年、AI、長照"></div>
+  </div>
+  <div class="panel">
+    <details class="rub" id="rub" open>
+      <summary>判準</summary>
+      <dl>
+        <dt><span class="chip k-att">態度</span></dt><dd>寫的是希望城市變成什麼樣子，沒有寫市府要做哪一件事。</dd>
+        <dt><span class="chip k-dir">施政方向</span></dt><dd>寫了要做哪一類事（擴大、強化、推動、建置某類設施），但沒有數量、範圍或完成標準。</dd>
+        <dt><span class="chip k-goal">具體目標</span></dt><dd>寫了可以點名的產出：數字、金額、新設機構、具名計畫或制度。</dd>
+        <dd style="margin-top:4px">類型與難度只說「事後好不好檢查」，不代表政策好壞。</dd>
+        <dt>難度 <span class="dots"><i class="f"></i><i></i><i></i></span>易</dt><dd>查自治條例、預算書或公告就能判斷有沒有做到。</dd>
+        <dt>難度 <span class="dots"><i class="f"></i><i class="f"></i><i></i></span>中</dt><dd>知道要做什麼，但「做到」要先講好基準年、幅度或算法。</dd>
+        <dt>難度 <span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i></span>難</dt><dd>沒有可觀察的產出，或成果受天氣、景氣、人口等外部因素左右。</dd>
+      </dl>
+    </details>
+    <details class="rub" id="lim">
+      <summary>限制（6 條）</summary>
+      <ul class="limlist">
+        <li>只看文宣上的一行字。</li>
+        <li>單一編碼者，沒有算一致性。</li>
+        <li>一條有兩件事時，依較具體的一半歸類。</li>
+        <li>難度只看能不能判斷有沒有做到。</li>
+        <li>統一類別是後來加的。</li>
+        <li>條數不等於份量。</li>
+      </ul>
+      <a href="#notes" style="font-size:13px">看完整說明與原圖 ↓</a>
+    </details>
+  </div>
+</aside>
+<button type="button" class="fab" id="fab">篩選</button>
+
+<main>
+  <div class="status" aria-live="polite">
+    <span id="count"></span>
+    <div class="seg" id="fView" role="group" aria-label="分類方式"></div>
+    <button type="button" id="reset">清除篩選</button>
+    <button type="button" id="swap" title="左右對調兩方的位置">⇄ 左右對調</button>
+    <div class="seg" id="fCat" role="group" aria-label="類別" hidden></div>
+  </div>
+  <div id="board"></div>
+</main>
+</div>
+
+<section class="notes" id="notes">
+  <div>
+    <h2>這張表在什麼情況下會錯</h2>
+    <ul>
+      <li><b>只看文宣上的一行字。</b>候選人的完整政見書、官網或辯論若補了數字、期程或預算，該條的類型與難度就要往「具體目標／易」調。這裡只代表文宣這一版的寫法。</li>
+      <li><b>單一編碼者。</b>72 條由同一套判準一人歸類，沒有第二位編碼者、也沒有算一致性；「施政方向」與「具體目標」的邊界（例如「建置社區微電網」沒寫處數，歸方向；「建置台北 AI 算力點」是單一設施，歸目標）最容易有爭議。</li>
+      <li><b>一條裡有兩件事時，依最具體的那一半歸類</b>（例如「新生兒 8 小時臨托券、擴大私立幼兒園補助」歸具體目標），另一半的模糊寫在說明裡。若改成依最模糊的一半歸類，兩邊的「具體目標」都會變少。</li>
+      <li><b>難度只看「能不能判斷有沒有做到」，不看政策好不好、做不做得到。</b>「通學區零死亡」好查但很難達成；「降低國中小師生比」好查，但少子化本身就會讓數字下降，做到不等於政策有效。</li>
+      <li><b>統一類別是後來加的。</b>一條政見可能同時屬於兩類（例如「青年 AI 錢包」放在青年與就業，不在 AI 與產業），換類別不會改變類型與難度，但會改變每類的條數比較。</li>
+      <li><b>條數不等於份量。</b>兩份文宣都是 36 條，但一條「8 年 20 億」與一條「升級防災 APP」在表上同樣只算一格。</li>
+    </ul>
+  </div>
+  <div>
+    <h2>來源</h2>
+    <p style="font-size:14px;margin:0 0 8px">兩邊都用文宣自己的標題稱呼。藍色：「安心守護 生命的每一個階段／萬全準備 城市的下一個十年」文宣，標誌為「台北安可」，文宣上沒有印候選人姓名。綠色：「HEART」文宣（Habitat、Empower、Accompany、Resilience、Time），文末寫「更多市政願景請上沈伯洋官方網站」。文字依原圖逐條轉錄，類別、類型、難度與說明為本頁加註。預設藍左綠右只是收到文宣的先後，可用「左右對調」交換；類別依兩方合計條數由多到少排列。</p>
+    <div class="imgs">
+      <a href="source/blue.png" target="_blank" rel="noopener"><img src="source/blue.png" alt="藍色文宣原圖"></a>
+      <a href="source/green.png" target="_blank" rel="noopener"><img src="source/green.png" alt="綠色文宣原圖"></a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+const CATS = {
+  fam:"婚育與兒少", youth:"青年與就業", age:"高齡與長照", health:"健康與心理",
+  house:"居住", trans:"交通與步行", resil:"氣候、防災與安全", ai:"AI 與產業",
+  space:"城市空間與區域", culture:"運動、文化與觀光", edu:"教育", gov:"市政治理", misc:"其他民生"
+};
+const TYPES = {goal:"具體目標", dir:"施政方向", att:"態度"};
+const DIFFS = {1:"易",2:"中",3:"難"};
+const SIDES = {blue:"藍｜台北安可", green:"綠｜HEART"};
+const GROUPS = {
+  blue:[
+    ["安心生","安心守護 生命的每一個階段"],["安心拼","安心守護 生命的每一個階段"],["安心住","安心守護 生命的每一個階段"],["安心顧","安心守護 生命的每一個階段"],
+    ["可智慧","萬全準備 城市的下一個十年"],["可創新","萬全準備 城市的下一個十年"],["可韌性","萬全準備 城市的下一個十年"],["可均衡","萬全準備 城市的下一個十年"],["可悠活","萬全準備 城市的下一個十年"]
+  ],
+  green:[
+    ["Habitat 空間，順起來",""],["Empower 機會，給出來",""],["Accompany 陪伴，不孤單",""],["Resilience 韌性，有安心",""],["Time 時間，省下來",""]
+  ]
+};
+// [side, 原始分類, 統一類別, 類型, 難度, 政見原文, 怎麼查／為什麼]
+const P = [
+["blue","安心生","house","goal",2,"提供1萬戶婚育居住資源","戶數明確，但「居住資源」可含社宅、租金補貼、包租代管，算法要先講好"],
+["blue","安心生","fam","goal",1,"減免婚育家庭房屋稅、地價稅","查自治條例有沒有修、適用對象是誰"],
+["blue","安心生","fam","goal",1,"好孕2U PLUS，補助加碼、期限延長","既有方案，對照現行金額與期限即可"],
+["blue","安心生","fam","goal",1,"3萬元月子加菜金、醫療性凍卵補助","金額明確，查是否開辦"],
+["blue","安心生","fam","goal",2,"新生兒8小時免費臨托券、擴大私立幼兒園補助","臨托券有數字；「擴大」幼兒園補助沒寫幅度（混合）"],
+["blue","安心拼","health","goal",2,"推出青年「心空間 × 心生活」心理支持","具名方案，有沒有推出好查；服務量沒寫"],
+["blue","安心拼","youth","goal",1,"打造玉成AI青年職住基地、延吉青職培力基地","兩處具名基地，查是否啟用"],
+["blue","安心拼","youth","goal",2,"設立青年發展與投資基金","有沒有設立好查；基金規模沒寫"],
+["blue","安心拼","youth","dir",2,"擴大職前訓練、職能進修及AI／數位職訓","要先定基準年的開班數或受訓人次"],
+["blue","安心拼","health","dir",3,"強化兒少、女性、職場及社區心理健康服務","「強化」沒有判準，四類對象各自的基準也不同"],
+["blue","安心拼","youth","goal",1,"建置新職能大樓與跨世代學習空間","查是否動工、啟用（地點未寫）"],
+["blue","安心住","age","dir",2,"轉型公有住宅為樂齡住宅","沒寫戶數，轉幾戶都可以說做到"],
+["blue","安心住","house","dir",2,"推動增建電梯、青銀換居","沒寫棟數與媒合戶數"],
+["blue","安心住","age","dir",2,"增加高齡友善住宅及照護服務","「增加」要對照基準年"],
+["blue","安心住","space","dir",2,"活化閒置公有土地，整合托幼、長照、醫療、文化","要列出哪幾塊地、啟用幾處"],
+["blue","安心顧","misc","goal",1,"擴大寵物保險補助，提供高齡／長期收容認養犬貓免費健檢","查補助辦法與適用條件"],
+["blue","安心顧","health","dir",3,"完善災後心理復原及第一線工作者照顧","「完善」沒有標準，沒有災害時也看不到成果"],
+["blue","安心顧","culture","dir",2,"升級U-Sport Family","既有方案名，但「升級」的內容沒寫"],
+["blue","安心顧","misc","goal",1,"率先成立臺北市消費者保護基金會，確保消費者權益","查是否捐助成立、完成登記"],
+["blue","可智慧","ai","goal",1,"導入CiviClaw市府AI數位助理","查是否上線；使用量與答對率另需指標"],
+["blue","可智慧","ai","goal",1,"推出AI旅遊秘書","查是否上線"],
+["blue","可智慧","trans","dir",3,"打造自駕交通示範城市","「示範城市」沒有門檻，一條測試路線也能算"],
+["blue","可創新","ai","dir",3,"串聯北士科、內科與南港為AI＋Bio共同創新中心","「串聯」看不到具體產出"],
+["blue","可創新","ai","goal",2,"建置台北AI算力點、公共GPU算力中樞","有沒有建好查；算力規模沒寫"],
+["blue","可創新","ai","goal",2,"成立台北AI旗艦創業基金","有沒有成立好查；基金規模沒寫"],
+["blue","可創新","ai","goal",2,"台北AI全球起飛計畫，提供國際法遵、專利及海外市場資源","具名計畫；服務家數與預算沒寫"],
+["blue","可韌性","resil","dir",3,"降溫城市2.0，科學治熱","沒有降溫指標，氣溫也受天氣年際變化左右"],
+["blue","可韌性","resil","dir",2,"升級行動防災APP","對象明確，「升級」內容沒寫"],
+["blue","可韌性","resil","goal",1,"建置數位鑑識第二實驗室","單一設施，查是否啟用"],
+["blue","可均衡","space","att",3,"北區科技廊帶、西區首都門戶、東區活力核心、南區新生活圈","四個區域定位，沒有寫市府要做什麼"],
+["blue","可均衡","space","dir",2,"啟動台北南區新生計畫，從水源新天地出發，串聯水岸、運動、文化、商業、大學與生活","起點具名，「啟動」好查；串聯的成果沒有標準"],
+["blue","可悠活","trans","goal",2,"建構捷運站周邊300公尺舒適步行圈","有距離，但幾個站、怎樣算「舒適」沒寫"],
+["blue","可悠活","trans","dir",2,"增設微型廣場、樹蔭、座椅、飲水及候車空間","處數可數，但沒有目標數"],
+["blue","可悠活","trans","dir",2,"設置行人友善區、路口降速及行人庇護島","處數可數，但沒有目標數"],
+["blue","可悠活","space","att",3,"河岸更親水、山林更好走","描述期望的樣子，沒有寫要做哪件事"],
+["blue","可悠活","trans","dir",3,"打造臺北新水岸人本通行環境","範圍與完成標準都沒寫"],
+
+["green","Habitat 空間，順起來","resil","dir",2,"培育都市微森林，台北降溫","微森林處數可數；「降溫」成效很難歸因（混合）"],
+["green","Habitat 空間，順起來","culture","att",3,"打造亞洲第一登山觀光城","「亞洲第一」沒有公認的排名可對照"],
+["green","Habitat 空間，順起來","space","dir",3,"兩河流域再造，改善河濱空間","「再造」「改善」範圍與完成標準都沒寫"],
+["green","Habitat 空間，順起來","culture","dir",2,"建構首都文化徑","有名稱，但路線與內容沒寫"],
+["green","Habitat 空間，順起來","house","dir",2,"擴大提供青年宅及婚育宅","沒寫戶數"],
+["green","Habitat 空間，順起來","house","dir",2,"加速老宅延壽，市府服務送到家","「加速」要對照現行案件數與審查天數"],
+["green","Habitat 空間，順起來","culture","goal",1,"興建圓山超級市民運動中心","單一設施，查是否動工、啟用"],
+["green","Habitat 空間，順起來","culture","goal",2,"籌建關渡國際足球場","「籌建」做到規劃算不算數，要先講好"],
+["green","Empower 機會，給出來","youth","goal",1,"設立城市青年基金，滿22歲領50萬","對象與金額明確，查是否發放"],
+["green","Empower 機會，給出來","youth","goal",2,"補助跨平台跨模型青年 AI 錢包","有沒有開辦好查；金額與年齡範圍沒寫"],
+["green","Empower 機會，給出來","youth","goal",1,"8年20億台北青年圓夢計畫","年期與金額明確，查預算編列與執行"],
+["green","Empower 機會，給出來","youth","dir",2,"45歲以上市民轉職創業支持","對象明確，「支持」的形式與規模沒寫"],
+["green","Empower 機會，給出來","gov","goal",1,"成立市政智庫：台北研究院","單一機構，查是否成立"],
+["green","Empower 機會，給出來","ai","goal",1,"台灣科技新創基地進駐北士科","具名機構與地點，查是否進駐"],
+["green","Accompany 陪伴，不孤單","fam","goal",1,"新增0至18歲親子同行卡，每月600點","對象與點數明確"],
+["green","Accompany 陪伴，不孤單","fam","goal",1,"設置家長版1999，提供家庭服務一站通","單一服務，查是否上線"],
+["green","Accompany 陪伴，不孤單","age","dir",2,"增加長照機構床位，落實在地安老","沒寫床數，要對照基準年"],
+["green","Accompany 陪伴，不孤單","age","goal",2,"健身小巴進社區，敬老卡多元使用","小巴好查；「多元使用」範圍沒寫（混合）"],
+["green","Accompany 陪伴，不孤單","age","dir",2,"擴大社區共照、在宅醫療及失智友善設計中心","「擴大」要對照基準年"],
+["green","Accompany 陪伴，不孤單","culture","goal",1,"發放單身者運動幣及文化幣","查是否發放；金額沒寫"],
+["green","Accompany 陪伴，不孤單","health","goal",1,"新增45~65 歲心理諮商補助","對象年齡明確，查補助辦法"],
+["green","Resilience 韌性，有安心","health","goal",1,"0~6 歲兒童腸病毒疫苗免費","對象明確，查是否開辦"],
+["green","Resilience 韌性，有安心","health","goal",1,"補助 50歲以上皮蛇疫苗","對象明確，查補助辦法"],
+["green","Resilience 韌性，有安心","trans","goal",2,"人本交通，目標通學區零死亡","死亡數好查；「通學區」範圍要先定"],
+["green","Resilience 韌性，有安心","resil","dir",2,"建置社區微電網，強化電力韌性","沒寫處數與容量"],
+["green","Resilience 韌性，有安心","gov","dir",3,"推動公務員及教師行政減壓計畫","「減壓」沒有量法"],
+["green","Resilience 韌性，有安心","edu","dir",2,"降低國中小師生比","數字好查，但少子化本身就會讓師生比下降"],
+["green","Resilience 韌性，有安心","edu","dir",2,"補足校園特教及輔導人力","可對照法定員額，但沒寫補到多少"],
+["green","Resilience 韌性，有安心","gov","goal",1,"設置「夜間市長」，重視夜間治理","單一職位，查是否設置"],
+["green","Resilience 韌性，有安心","gov","goal",1,"設置「城市設計長」，促進城市美學","單一職位，查是否設置"],
+["green","Resilience 韌性，有安心","culture","goal",2,"推動無限城論壇，台北走向國際","論壇好查；「走向國際」沒有標準（混合）"],
+["green","Time 時間，省下來","fam","goal",2,"週週有臨托，助家長喘息","頻率明確；地點與名額沒寫"],
+["green","Time 時間，省下來","youth","dir",2,"補助企業，擴大實施彈性工時","要先定基準：幾家企業、多少員工"],
+["green","Time 時間，省下來","culture","dir",2,"設置運動驛站，運動零折返","沒寫處數"],
+["green","Time 時間，省下來","trans","goal",1,"TPASS 納入共享電動機車等","查 TPASS 方案是否納入"],
+["green","Time 時間，省下來","trans","goal",2,"北捷安全總體檢，通勤零障礙","總體檢好查；「零障礙」沒有標準（混合）"],
+].map((r,i)=>({id:i,side:r[0],grp:r[1],cat:r[2],type:r[3],diff:r[4],text:r[5],why:r[6]}));
+
+const CAT_ORDER = Object.keys(CATS).map((k,i)=>[k,i,P.filter(p=>p.cat===k).length]).sort((a,b)=>b[2]-a[2]||a[1]-b[1]).map(x=>x[0]);
+const S = {side:new Set(), type:new Set(), diff:new Set(), cat:"all", q:"", view:"cat", order:["blue","green"]};
+const $ = s=>document.querySelector(s);
+const esc = s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const qhit = p=>!S.q||(p.text+p.why+p.grp+CATS[p.cat]).toLowerCase().includes(S.q.toLowerCase());
+const sname = sd=>sd==="blue"?"藍":"綠";
+const scls = sd=>sd==="blue"?"b":"g";
+
+function match(p, skip){
+  if(skip!=="side" && S.side.size && !S.side.has(p.side)) return false;
+  if(skip!=="type" && S.type.size && !S.type.has(p.type)) return false;
+  if(skip!=="diff" && S.diff.size && !S.diff.has(String(p.diff))) return false;
+  if(skip!=="cat" && S.cat!=="all" && p.cat!==S.cat) return false;
+  return qhit(p);
+}
+function dots(d){ return '<span class="dots" title="評估難度：'+DIFFS[d]+'">'+[1,2,3].map(i=>'<i'+(i<=d?' class="f"':'')+'></i>').join("")+DIFFS[d]+'</span>'; }
+function hl(s){ if(!S.q) return esc(s); const i=s.toLowerCase().indexOf(S.q.toLowerCase()); if(i<0) return esc(s); return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+S.q.length))+"</mark>"+esc(s.slice(i+S.q.length)); }
+function card(p, showGrp){
+  return '<div class="card '+p.side+'"><div class="t">'+hl(p.text)+'</div><div class="meta">'+
+    '<span class="chip k-'+p.type+'">'+TYPES[p.type]+'</span>'+dots(p.diff)+
+    (showGrp?'<span class="chip grp">'+(showGrp==="grp"?esc(p.grp):CATS[p.cat])+'</span>':'')+
+    '</div><div class="why">'+hl(p.why)+'</div></div>';
+}
+function seg(el, items, sel, multi){
+  el.innerHTML = items.map(([k,label,c,cl])=>'<button type="button" data-k="'+k+'" class="'+(cl||"")+'" aria-pressed="'+(multi?sel.has(k):sel===k)+'"'+(c===0?' disabled':'')+'>'+label+(c!=null?'<span class="c">'+c+'</span>':'')+'</button>').join("");
+}
+const anyF = ()=>S.side.size||S.type.size||S.diff.size||S.cat!=="all"||S.q;
+
+function render(){
+  const cnt=(skip,f)=>P.filter(p=>match(p,skip)&&f(p)).length;
+  seg($("#fSide"), S.order.map(sd=>[sd, sname(sd), cnt("side",p=>p.side===sd), scls(sd)]), S.side, true);
+  seg($("#fType"), Object.entries(TYPES).map(([k,v])=>[k,v,cnt("type",p=>p.type===k)]), S.type, true);
+  seg($("#fDiff"), Object.entries(DIFFS).map(([k,v])=>[k,v,cnt("diff",p=>String(p.diff)===k)]), S.diff, true);
+  seg($("#fView"), [["cat","依統一類別"],["grp","依原文宣分類"]], S.view, false);
+  const catEl=$("#fCat");
+  catEl.hidden = S.view!=="cat";
+  seg(catEl, [["all","全部類別",null]].concat(CAT_ORDER.map(k=>[k,CATS[k],cnt("cat",p=>p.cat===k)])), S.cat, false);
+
+  // merged matrix: rows = type, columns = side x difficulty; counts follow category + search only
+  const base=P.filter(p=>(S.cat==="all"||p.cat===S.cat)&&qhit(p));
+  const narrowed = S.side.size||S.type.size||S.diff.size;
+  let h='<table class="mx"><tr><th></th>'+S.order.map((sd,i)=>(i?'<td class="gap"></td>':'')+'<th colspan="3" class="sh '+scls(sd)+'">'+SIDES[sd]+'</th>').join("")+'</tr>';
+  h+='<tr><th></th>'+S.order.map((sd,i)=>(i?'<td class="gap"></td>':'')+'<th>易</th><th>中</th><th>難</th>').join("")+'</tr>';
+  for(const [t,tl] of Object.entries(TYPES)){
+    h+='<tr><th class="r">'+tl+'</th>';
+    S.order.forEach((sd,i)=>{
+      if(i) h+='<td class="gap"></td>';
+      for(const d of ["1","2","3"]){
+        const n=base.filter(p=>p.side===sd&&p.type===t&&String(p.diff)===d).length;
+        const on=!!narrowed&&(!S.side.size||S.side.has(sd))&&(!S.type.size||S.type.has(t))&&(!S.diff.size||S.diff.has(d));
+        h+='<td><button type="button" data-cell="'+sd+'|'+t+'|'+d+'" class="'+(on?"o"+scls(sd):'')+'" aria-pressed="'+on+'" aria-label="'+SIDES[sd]+' '+tl+' '+DIFFS[d]+' '+n+' 條"'+(n===0?' disabled':'')+'>'+n+'</button></td>';
+      }
+    });
+    h+='</tr>';
+  }
+  $("#matrices").innerHTML=h+'</table>';
+  $("#mxpct").innerHTML=S.order.map(sd=>{
+    const a=base.filter(p=>p.side===sd), n=a.length;
+    const pc=t=>n?Math.round(a.filter(p=>p.type===t).length/n*100):0;
+    return '<b class="'+scls(sd)+'">'+sname(sd)+' '+n+' 條</b>：目標 '+pc("goal")+'%・方向 '+pc("dir")+'%・態度 '+pc("att")+'%';
+  }).join("<br>");
+
+  const vis=P.filter(p=>match(p));
+  const c=sd=>vis.filter(p=>p.side===sd).length;
+  $("#count").innerHTML='顯示 <b>'+vis.length+'</b> 條（'+S.order.map(sd=>sname(sd)+' '+c(sd)).join("、")+'）';
+  $("#reset").disabled=!anyF();
+
+  const board=$("#board");
+  if(!vis.length){ board.innerHTML='<p class="empty">沒有符合條件的政見。<button type="button" onclick="resetAll()">清除篩選</button></p>'; return; }
+  const shown=S.order.filter(sd=>!S.side.size||S.side.has(sd));
+  const one=shown.length===1?" one":"";
+  if(S.view==="cat"){
+    let h='<div class="cols-head'+one+'"><div>類別<small style="font-weight:400;color:var(--muted)">（依合計條數）</small></div>'+shown.map(sd=>'<div class="h'+scls(sd)+'">'+SIDES[sd]+'</div>').join("")+'</div>';
+    for(const k of CAT_ORDER){
+      const per=shown.map(sd=>vis.filter(p=>p.cat===k&&p.side===sd));
+      if(per.every(a=>!a.length)) continue;
+      h+='<div class="cat'+one+'"><h3>'+CATS[k]+'<span class="cn">'+S.order.map(sd=>sname(sd)+' '+vis.filter(p=>p.cat===k&&p.side===sd).length).join("・")+'</span></h3>'+
+        shown.map((sd,i)=>'<div class="side '+sd+'" data-label="'+SIDES[sd]+'">'+(per[i].length?per[i].map(p=>card(p,"grp")).join(""):'<div class="empty">這一類沒有政見'+(anyF()?'符合篩選':'')+'</div>')+'</div>').join("")+'</div>';
+    }
+    board.innerHTML=h;
+  }else{
+    const col=sd=>{
+      const arr=vis.filter(p=>p.side===sd);
+      if(!arr.length) return '<div class="'+sd+'"><div class="colt '+scls(sd)+'">'+SIDES[sd]+'</div><div class="empty">沒有符合篩選的政見</div></div>';
+      let h='<div class="'+sd+'"><div class="colt '+scls(sd)+'">'+SIDES[sd]+'</div>', last="";
+      for(const [g,parent] of GROUPS[sd]){
+        const items=arr.filter(p=>p.grp===g); if(!items.length) continue;
+        if(parent&&parent!==last){ h+='<div style="font-size:12.5px;color:var(--muted);margin-top:8px">'+parent+'</div>'; last=parent; }
+        h+='<div class="gh">'+g+'<small>'+items.length+' 條</small></div><div class="side">'+items.map(p=>card(p,"cat")).join("")+'</div>';
+      }
+      return h+'</div>';
+    };
+    board.innerHTML='<div class="orig"'+(shown.length===1?' style="grid-template-columns:1fr"':'')+'>'+shown.map(col).join("")+'</div>';
+  }
+}
+function toggle(set,k){ set.has(k)?set.delete(k):set.add(k); }
+function resetAll(){ S.side.clear();S.type.clear();S.diff.clear();S.cat="all";S.q="";$("#q").value="";render(); }
+const segClick=(id,fn)=>{$(id).onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;fn(b.dataset.k);render();};};
+segClick("#fSide",k=>toggle(S.side,k));
+segClick("#fType",k=>toggle(S.type,k));
+segClick("#fDiff",k=>toggle(S.diff,k));
+segClick("#fCat",k=>{S.cat=k;});
+segClick("#fView",k=>{S.view=k; if(k==="grp") S.cat="all";});
+$("#matrices").onclick=e=>{const b=e.target.closest("button[data-cell]");if(!b)return;const [sd,t,d]=b.dataset.cell.split("|");
+  const same=S.side.size===1&&S.side.has(sd)&&S.type.size===1&&S.type.has(t)&&S.diff.size===1&&S.diff.has(d);
+  S.side.clear();S.type.clear();S.diff.clear();
+  if(!same){S.side.add(sd);S.type.add(t);S.diff.add(d);}
+  render();};
+$("#q").oninput=e=>{S.q=e.target.value.trim();render();};
+$("#reset").onclick=resetAll;
+$("#swap").onclick=()=>{S.order.reverse();render();};
+$("#fab").onclick=()=>{document.querySelector("aside").scrollIntoView({behavior:"smooth"});};
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark";try{localStorage.setItem("tp-theme",r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem("tp-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}
+if(matchMedia("(max-width:900px)").matches) $("#rub").removeAttribute("open");
+try{ new IntersectionObserver(es=>{ $("#fab").style.visibility = es[0].isIntersecting ? "hidden" : "visible"; }).observe(document.querySelector("aside")); }catch(e){}
+render();
+</script>
+</body>
+</html>
