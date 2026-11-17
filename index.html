@@ -4,7 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>台北市政見對照</title>
-<meta name="description" content="兩份台北市長選舉政見文宣合併成一張表：依類別對照，並標出每條政見屬於態度、施政方向或具體目標，以及事後評估有沒有做到的難度。">
+<meta name="description" content="2026 台北市長選舉兩份文宣的 72 條政見，打亂、不標來源，依類別看每條是態度、施政方向還是具體目標，以及事後評估有沒有做到的難度。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="台北市政見對照">
+<meta property="og:description" content="2026 台北市長選舉兩份文宣的 72 條政見，打亂、不標來源，依類別看每條是態度、施政方向還是具體目標，以及事後好不好檢查。">
+<meta property="og:url" content="https://richyli.github.io/taipei-policy-compare/">
+<meta property="og:image" content="https://richyli.github.io/taipei-policy-compare/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
   --bg:#ffffff; --fg:#111719; --muted:#4a5559; --line:#d9dfe1; --soft:#f3f6f6;
@@ -104,6 +112,10 @@ details.rub dd{margin:0 0 0 0;color:var(--muted)}
 .status button:disabled{opacity:.45;cursor:default}
 .fab{display:none}
 .cat.one,.cols-head.one{grid-template-columns:150px 1fr}
+.mixed{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:start}
+.card.neutral{border-left-color:var(--muted);background:var(--soft)}
+.mx td button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.status button.reveal{border-color:var(--accent);color:var(--accent);font-weight:600;background:var(--bg)}
 .chip.grp{border:none;color:var(--muted);padding:0}
 .dots{font-size:12px;white-space:nowrap;color:var(--fg)}
 .dots i{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--fg);margin-right:2px;vertical-align:-1px}
@@ -137,6 +149,7 @@ section.notes .imgs img{width:100%;border:1px solid var(--line);border-radius:4p
   .orig{grid-template-columns:1fr}
   section.notes{grid-template-columns:1fr}
   .cat.one{grid-template-columns:1fr}
+  .mixed{grid-template-columns:1fr}
   .seg button,.status button,.theme{min-height:40px}
   .mx td button{min-height:38px}
   .fab{display:block;position:fixed;right:16px;bottom:16px;z-index:5;border:none;border-radius:999px;padding:10px 18px;min-height:44px;background:var(--accent);color:#fff;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
@@ -204,6 +217,8 @@ section.notes .imgs img{width:100%;border:1px solid var(--line);border-radius:4p
     <div class="seg" id="fView" role="group" aria-label="分類方式"></div>
     <button type="button" id="reset">清除篩選</button>
     <button type="button" id="swap" title="左右對調兩方的位置">⇄ 左右對調</button>
+    <button type="button" id="reshuffle">重新打亂</button>
+    <button type="button" id="blind" class="reveal">揭曉來源</button>
     <div class="seg" id="fCat" role="group" aria-label="類別" hidden></div>
   </div>
   <div id="board"></div>
@@ -224,10 +239,13 @@ section.notes .imgs img{width:100%;border:1px solid var(--line);border-radius:4p
   </div>
   <div>
     <h2>來源</h2>
+    <p style="font-size:14px;margin:0 0 8px">兩份 2026 台北市長選舉政見文宣，各 36 條，文字依原圖逐條轉錄。預設把 72 條打亂、不標來源，也不顯示原文宣的分類名稱，讀的人只能看政見本身；按上方「揭曉來源」才分藍綠、顯示原圖。</p>
+    <div id="srcbox" hidden>
     <p style="font-size:14px;margin:0 0 8px">兩邊都用文宣自己的標題稱呼。藍色：「安心守護 生命的每一個階段／萬全準備 城市的下一個十年」文宣，標誌為「台北安可」，文宣上沒有印候選人姓名。綠色：「HEART」文宣（Habitat、Empower、Accompany、Resilience、Time），文末寫「更多市政願景請上沈伯洋官方網站」。文字依原圖逐條轉錄，類別、類型、難度與說明為本頁加註。預設藍左綠右只是收到文宣的先後，可用「左右對調」交換；類別依兩方合計條數由多到少排列。</p>
     <div class="imgs">
       <a href="source/blue.png" target="_blank" rel="noopener"><img src="source/blue.png" alt="藍色文宣原圖"></a>
       <a href="source/green.png" target="_blank" rel="noopener"><img src="source/green.png" alt="綠色文宣原圖"></a>
+    </div>
     </div>
   </div>
 </section>
@@ -255,7 +273,7 @@ const GROUPS = {
 const P = [
 ["blue","安心生","house","goal",2,"提供1萬戶婚育居住資源","戶數明確，但「居住資源」可含社宅、租金補貼、包租代管，算法要先講好"],
 ["blue","安心生","fam","goal",1,"減免婚育家庭房屋稅、地價稅","查自治條例有沒有修、適用對象是誰"],
-["blue","安心生","fam","goal",1,"好孕2U PLUS，補助加碼、期限延長","既有方案，對照現行金額與期限即可"],
+["blue","安心生","fam","goal",1,"好孕2U PLUS，補助加碼、期限延長","加碼與延長的幅度可對照前一版金額與期限"],
 ["blue","安心生","fam","goal",1,"3萬元月子加菜金、醫療性凍卵補助","金額明確，查是否開辦"],
 ["blue","安心生","fam","goal",2,"新生兒8小時免費臨托券、擴大私立幼兒園補助","臨托券有數字；「擴大」幼兒園補助沒寫幅度（混合）"],
 ["blue","安心拼","health","goal",2,"推出青年「心空間 × 心生活」心理支持","具名方案，有沒有推出好查；服務量沒寫"],
@@ -270,7 +288,7 @@ const P = [
 ["blue","安心住","space","dir",2,"活化閒置公有土地，整合托幼、長照、醫療、文化","要列出哪幾塊地、啟用幾處"],
 ["blue","安心顧","misc","goal",1,"擴大寵物保險補助，提供高齡／長期收容認養犬貓免費健檢","查補助辦法與適用條件"],
 ["blue","安心顧","health","dir",3,"完善災後心理復原及第一線工作者照顧","「完善」沒有標準，沒有災害時也看不到成果"],
-["blue","安心顧","culture","dir",2,"升級U-Sport Family","既有方案名，但「升級」的內容沒寫"],
+["blue","安心顧","culture","dir",2,"升級U-Sport Family","「升級」的內容沒寫"],
 ["blue","安心顧","misc","goal",1,"率先成立臺北市消費者保護基金會，確保消費者權益","查是否捐助成立、完成登記"],
 ["blue","可智慧","ai","goal",1,"導入CiviClaw市府AI數位助理","查是否上線；使用量與答對率另需指標"],
 ["blue","可智慧","ai","goal",1,"推出AI旅遊秘書","查是否上線"],
@@ -329,10 +347,12 @@ const P = [
 ].map((r,i)=>({id:i,side:r[0],grp:r[1],cat:r[2],type:r[3],diff:r[4],text:r[5],why:r[6]}));
 
 const CAT_ORDER = Object.keys(CATS).map((k,i)=>[k,i,P.filter(p=>p.cat===k).length]).sort((a,b)=>b[2]-a[2]||a[1]-b[1]).map(x=>x[0]);
-const S = {side:new Set(), type:new Set(), diff:new Set(), cat:"all", q:"", view:"cat", order:["blue","green"]};
+const S = {side:new Set(), type:new Set(), diff:new Set(), cat:"all", q:"", view:"cat", order:["blue","green"], blind:true};
+function shuffle(){ P.forEach(p=>p.rk=Math.random()); }
+shuffle();
 const $ = s=>document.querySelector(s);
 const esc = s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const qhit = p=>!S.q||(p.text+p.why+p.grp+CATS[p.cat]).toLowerCase().includes(S.q.toLowerCase());
+const qhit = p=>!S.q||(p.text+p.why+(S.blind?"":p.grp)+CATS[p.cat]).toLowerCase().includes(S.q.toLowerCase());
 const sname = sd=>sd==="blue"?"藍":"綠";
 const scls = sd=>sd==="blue"?"b":"g";
 
@@ -346,7 +366,8 @@ function match(p, skip){
 function dots(d){ return '<span class="dots" title="評估難度：'+DIFFS[d]+'">'+[1,2,3].map(i=>'<i'+(i<=d?' class="f"':'')+'></i>').join("")+DIFFS[d]+'</span>'; }
 function hl(s){ if(!S.q) return esc(s); const i=s.toLowerCase().indexOf(S.q.toLowerCase()); if(i<0) return esc(s); return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+S.q.length))+"</mark>"+esc(s.slice(i+S.q.length)); }
 function card(p, showGrp){
-  return '<div class="card '+p.side+'"><div class="t">'+hl(p.text)+'</div><div class="meta">'+
+  if(S.blind) showGrp=false;
+  return '<div class="card '+(S.blind?"neutral":p.side)+'"><div class="t">'+hl(p.text)+'</div><div class="meta">'+
     '<span class="chip k-'+p.type+'">'+TYPES[p.type]+'</span>'+dots(p.diff)+
     (showGrp?'<span class="chip grp">'+(showGrp==="grp"?esc(p.grp):CATS[p.cat])+'</span>':'')+
     '</div><div class="why">'+hl(p.why)+'</div></div>';
@@ -357,7 +378,15 @@ function seg(el, items, sel, multi){
 const anyF = ()=>S.side.size||S.type.size||S.diff.size||S.cat!=="all"||S.q;
 
 function render(){
+  if(S.blind){ S.side.clear(); S.view="cat"; }
+  $("#fSide").parentElement.hidden=S.blind;
+  $("#fView").hidden=S.blind;
+  $("#swap").hidden=S.blind;
+  $("#reshuffle").hidden=!S.blind;
+  $("#blind").textContent=S.blind?"揭曉來源（標藍／綠）":"回到打亂、不標來源";
+  $("#srcbox").hidden=S.blind;
   const cnt=(skip,f)=>P.filter(p=>match(p,skip)&&f(p)).length;
+  if(S.blind) return renderBlind(cnt);
   seg($("#fSide"), S.order.map(sd=>[sd, sname(sd), cnt("side",p=>p.side===sd), scls(sd)]), S.side, true);
   seg($("#fType"), Object.entries(TYPES).map(([k,v])=>[k,v,cnt("type",p=>p.type===k)]), S.type, true);
   seg($("#fDiff"), Object.entries(DIFFS).map(([k,v])=>[k,v,cnt("diff",p=>String(p.diff)===k)]), S.diff, true);
@@ -423,6 +452,38 @@ function render(){
     board.innerHTML='<div class="orig"'+(shown.length===1?' style="grid-template-columns:1fr"':'')+'>'+shown.map(col).join("")+'</div>';
   }
 }
+function renderBlind(cnt){
+  seg($("#fType"), Object.entries(TYPES).map(([k,v])=>[k,v,cnt("type",p=>p.type===k)]), S.type, true);
+  seg($("#fDiff"), Object.entries(DIFFS).map(([k,v])=>[k,v,cnt("diff",p=>String(p.diff)===k)]), S.diff, true);
+  const catEl=$("#fCat"); catEl.hidden=false;
+  seg(catEl, [["all","全部類別",null]].concat(CAT_ORDER.map(k=>[k,CATS[k],cnt("cat",p=>p.cat===k)])), S.cat, false);
+  const base=P.filter(p=>(S.cat==="all"||p.cat===S.cat)&&qhit(p));
+  const narrowed=S.type.size||S.diff.size;
+  let h='<table class="mx"><tr><th></th><th>易</th><th>中</th><th>難</th><th>合計</th></tr>';
+  for(const [t,tl] of Object.entries(TYPES)){
+    const row=base.filter(p=>p.type===t);
+    h+='<tr><th class="r">'+tl+'</th>';
+    for(const d of ["1","2","3"]){
+      const n=row.filter(p=>String(p.diff)===d).length;
+      const on=!!narrowed&&(!S.type.size||S.type.has(t))&&(!S.diff.size||S.diff.has(d));
+      h+='<td><button type="button" data-cell="any|'+t+'|'+d+'" class="'+(on?"on":"")+'" aria-pressed="'+on+'" aria-label="'+tl+' '+DIFFS[d]+' '+n+' 條"'+(n===0?' disabled':'')+'>'+n+'</button></td>';
+    }
+    h+='<td class="tot">'+row.length+'</td></tr>';
+  }
+  $("#matrices").innerHTML=h+'</table>';
+  $("#mxpct").innerHTML='共 '+base.length+' 條，不分來源。按「揭曉來源」才分藍綠。';
+  const vis=P.filter(p=>match(p)).sort((a,b)=>a.rk-b.rk);
+  $("#count").innerHTML='顯示 <b>'+vis.length+'</b> 條（已打亂、不標來源）';
+  $("#reset").disabled=!anyF();
+  const board=$("#board");
+  if(!vis.length){ board.innerHTML='<p class="empty">沒有符合條件的政見。<button type="button" onclick="resetAll()">清除篩選</button></p>'; return; }
+  let out='';
+  for(const k of CAT_ORDER){
+    const items=vis.filter(p=>p.cat===k); if(!items.length) continue;
+    out+='<div class="cat one"><h3>'+CATS[k]+'<span class="cn">'+items.length+' 條</span></h3><div class="mixed">'+items.map(p=>card(p)).join("")+'</div></div>';
+  }
+  board.innerHTML=out;
+}
 function toggle(set,k){ set.has(k)?set.delete(k):set.add(k); }
 function resetAll(){ S.side.clear();S.type.clear();S.diff.clear();S.cat="all";S.q="";$("#q").value="";render(); }
 const segClick=(id,fn)=>{$(id).onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;fn(b.dataset.k);render();};};
@@ -433,12 +494,15 @@ segClick("#fCat",k=>{S.cat=k;});
 segClick("#fView",k=>{S.view=k; if(k==="grp") S.cat="all";});
 $("#matrices").onclick=e=>{const b=e.target.closest("button[data-cell]");if(!b)return;const [sd,t,d]=b.dataset.cell.split("|");
   const same=S.side.size===1&&S.side.has(sd)&&S.type.size===1&&S.type.has(t)&&S.diff.size===1&&S.diff.has(d);
+  const sameBlind=sd==="any"&&!S.side.size&&S.type.size===1&&S.type.has(t)&&S.diff.size===1&&S.diff.has(d);
   S.side.clear();S.type.clear();S.diff.clear();
-  if(!same){S.side.add(sd);S.type.add(t);S.diff.add(d);}
+  if(!same&&!sameBlind){ if(sd!=="any") S.side.add(sd); S.type.add(t);S.diff.add(d);}
   render();};
 $("#q").oninput=e=>{S.q=e.target.value.trim();render();};
 $("#reset").onclick=resetAll;
 $("#swap").onclick=()=>{S.order.reverse();render();};
+$("#blind").onclick=()=>{S.blind=!S.blind; if(S.blind) shuffle(); render();};
+$("#reshuffle").onclick=()=>{shuffle();render();};
 $("#fab").onclick=()=>{document.querySelector("aside").scrollIntoView({behavior:"smooth"});};
 $("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark";try{localStorage.setItem("tp-theme",r.dataset.theme)}catch(e){}};
 try{const t=localStorage.getItem("tp-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}
